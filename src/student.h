@@ -13,10 +13,9 @@ public:
     string FirstName;
     string LastName;
     int Age;
-    string Gender;
 
     Student();
-    Student(int Id, string FirstName, string LastName, int Age, string Gender);
+    Student(int Id, string FirstName, string LastName, int Age);
     void GetStudent(list<Student> studentList, int Id);
 
 };

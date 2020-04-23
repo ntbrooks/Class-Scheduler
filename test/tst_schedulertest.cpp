@@ -29,8 +29,8 @@ schedulerTest::~schedulerTest()
 void schedulerTest::test_case1()
 {
     Student stud;
-    Student student1(1, "Matt", "Holiday", 14, "Male");
-    Student student2(2, "Jenny", "Smith", 15, "Female");
+    Student student1(1, "Matt", "Holiday", 14);
+    Student student2(2, "Jenny", "Smith", 15);
     list<Student> studentList;
     studentList.push_back(student1);
     studentList.push_back(student2);

@@ -7,13 +7,12 @@ Student::Student()
 
 }
 
-Student::Student(int Id, string FirstName, string LastName, int Age, string Gender)
+Student::Student(int Id, string FirstName, string LastName, int Age)
 {
     this -> Id = Id;
     this -> FirstName = FirstName;
     this -> LastName = LastName;
     this -> Age = Age;
-    this -> Gender = Gender;
 }
 
 void Student::GetStudent(list<Student> studentList, int Id)
@@ -24,7 +23,7 @@ void Student::GetStudent(list<Student> studentList, int Id)
         if (it->Id == Id) {
             cout << "ID: " << it->Id << endl;
             cout << "Name: " << it->FirstName << " " << it->LastName << endl;
-            cout << "Age: " << it->Age << " Gender: " << it->Gender << endl;
+            cout << "Age: " << it->Age << endl;
         }
     }
 }
