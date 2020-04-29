@@ -15,11 +15,11 @@ public:
     string CourseName;
     time_t ClassTime;
     Teacher Teacher;
-    list<Student> roster;
+    list<Student> Roster;
 
     English();
     English(int CourseId, string CourseName, time_t ClassTime, class Teacher Teacher);
-    void GetEnglishClass(int CourseId);
+    void GetEnglishClass(list<English> classList, int CourseId);
 };
 
 #endif // ENGLISH_H

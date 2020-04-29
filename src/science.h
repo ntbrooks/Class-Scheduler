@@ -15,11 +15,11 @@ public:
     string CourseName;
     time_t ClassTime;
     Teacher Teacher;
-    list<Student> roster;
+    list<Student> Roster;
 
     Science();
     Science(int CourseId, string CourseName, time_t ClassTime, class Teacher Teacher);
-    void GetScienceClass(int CourseId);
+    void GetScienceClass(list<Science> classList, int CourseId);
 };
 
 #endif // SCIENCE_H

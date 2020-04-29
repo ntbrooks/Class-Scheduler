@@ -14,11 +14,11 @@ public:
     string CourseName;
     time_t ClassTime;
     Teacher Teacher;
-    list<Student> roster;
+    list<Student> Roster;
 
     Business();
     Business(int CourseId, string CourseName, time_t ClassTime, class Teacher Teacher);
-    void GetBusinessClass(int CourseId);
+    void GetBusinessClass(list<Business> classList, int CourseId);
 };
 
 #endif // BUSINESS_H

@@ -15,11 +15,11 @@ public:
     string CourseName;
     time_t ClassTime;
     Teacher Teacher;
-    list<Student> roster;
+    list<Student> Roster;
 
     Math();
     Math(int CourseId, string CourseName, time_t ClassTime, class Teacher Teacher);
-    void GetMathClass(int CourseId);
+    void GetMathClass(list<Math> classList, int CourseId);
 };
 
 #endif // MATH_H

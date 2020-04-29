@@ -7,12 +7,6 @@ using namespace std;
 
 int main()
 {
-//    Student student(1, "Matt", "Holiday", 14, "Male");
-
-//    cout << "ID: " << student.Id << endl;
-//    cout << "Name: " << student.FirstName << " " << student.LastName << endl;
-//    cout << "Age: " << student.Age << endl;
-
     const int STUDENT_ROSTER_SIZE = 36;
     const int TEACHER_ROSTER_SIZE = 8;
     const int SUBJECTS_TAUGHT = 4;
@@ -147,6 +141,8 @@ int main()
 
         teacherArray[i] = teacher;
     }
+
+
 
     return 0;
 }
