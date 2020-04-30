@@ -1,25 +1,32 @@
-#include "business.h"
+#include "subject.h"
 #include "teacher.h"
 #include <iostream>
 
 using namespace std;
 
-Business::Business()
+Subject::Subject()
 {
 
 }
 
-Business::Business(int CourseId, string CourseName, time_t ClassTime, class Teacher Teacher)
+//Subject::Subject(int CourseId, string CourseName, int ClassTime, class Teacher Teacher)
+//{
+//    this -> CourseId = CourseId;
+//    this -> CourseName = CourseName;
+//    this -> ClassTime = ClassTime;
+//    this -> Teacher = Teacher;
+//}
+
+Subject::Subject(int CourseId, string CourseName, int ClassTime)
 {
     this -> CourseId = CourseId;
     this -> CourseName = CourseName;
     this -> ClassTime = ClassTime;
-    this -> Teacher = Teacher;
 }
 
-void Business::GetBusinessClass(list<Business> classList, int Id)
+void Subject::GetSubject(list<Subject> classList, int Id)
 {
-    list<Business> :: iterator it;
+    list<Subject> :: iterator it;
 
     for (it = classList.begin(); it != classList.end(); ++it) {
         if (it->CourseId == Id) {

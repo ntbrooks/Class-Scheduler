@@ -2,8 +2,7 @@
 #define STUDENT_H
 #include <list>
 #include <string>
-using namespace std;
-
+using namespace std;\
 
 class Student
 {
