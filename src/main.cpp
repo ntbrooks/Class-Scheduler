@@ -10,6 +10,7 @@ const int STUDENT_ROSTER_SIZE = 36;
 const int TEACHER_ROSTER_SIZE = 8;
 const int SUBJECTS_TAUGHT = 4;
 
+// list of first names
 string GetFirstName(int Id) {
     string fNameArray[STUDENT_ROSTER_SIZE]
     {
@@ -54,6 +55,7 @@ string GetFirstName(int Id) {
     return fNameArray[Id];
 }
 
+// list of last names
 string GetLastName(int Id) {
     string lNameArray[STUDENT_ROSTER_SIZE]
     {
@@ -98,6 +100,7 @@ string GetLastName(int Id) {
     return lNameArray[Id];
 }
 
+// list of school subjects
 string GetSchoolSubject(int Id) {
     string schoolSubjects[SUBJECTS_TAUGHT] {
         "Business",
@@ -112,8 +115,9 @@ string GetSchoolSubject(int Id) {
 // define Business classes and return list of classes
 list<Subject> BuildBusinessClasses(list<Subject> classList) {
 
-    Subject BUS111 = Subject(111, "Intro to Business", 90);
-    Subject ACC112 = Subject(122, "Intro to Accounting", 90);
+    int size = (STUDENT_ROSTER_SIZE / 2);
+    Subject BUS111 = Subject(111, "Intro to Business", 90, size);
+    Subject ACC112 = Subject(122, "Intro to Accounting", 90, size);
     classList.push_back(BUS111);
     classList.push_back(ACC112);
 
@@ -123,8 +127,9 @@ list<Subject> BuildBusinessClasses(list<Subject> classList) {
 // define English classes and return list of classes
 list<Subject> BuildEnglishClasses(list<Subject> classList) {
 
-    Subject ENG216 = Subject(216, "English", 90);
-    Subject ENG238 = Subject(238, "U.S. History", 90);
+    int size = (STUDENT_ROSTER_SIZE / 2);
+    Subject ENG216 = Subject(216, "English", 90, size);
+    Subject ENG238 = Subject(238, "U.S. History", 90, size);
     classList.push_back(ENG216);
     classList.push_back(ENG238);
 
@@ -134,8 +139,9 @@ list<Subject> BuildEnglishClasses(list<Subject> classList) {
 // define Math classes and return list of classes
 list<Subject> BuildMathClasses(list<Subject> classList) {
 
-    Subject MTH302 = Subject(302, "Algebra", 90);
-    Subject MTH341 = Subject(341, "Statistics", 90);
+    int size = (STUDENT_ROSTER_SIZE / 2);
+    Subject MTH302 = Subject(302, "Algebra", 90, size);
+    Subject MTH341 = Subject(341, "Statistics", 90, size);
     classList.push_back(MTH302);
     classList.push_back(MTH341);
 
@@ -145,30 +151,97 @@ list<Subject> BuildMathClasses(list<Subject> classList) {
 // define Science classes and return list of classes
 list<Subject> BuildScienceClasses(list<Subject> classList) {
 
-    Subject SCI421 = Subject(421, "Algebra", 90);
-    Subject SCI431 = Subject(431, "Statistics", 90);
+    int size = (STUDENT_ROSTER_SIZE / 2);
+    Subject SCI421 = Subject(421, "Biology", 90, size);
+    Subject SCI431 = Subject(431, "Chemistry", 90, size);
     classList.push_back(SCI421);
     classList.push_back(SCI431);
 
     return classList;
 }
 
-list<Subject> AssignTeachers(list<Subject> classList, Teacher arr[], int size) {
+// Assign a teacher to each one of the classes available
+list<Subject> AssignTeachersToClass(list<Subject> classList, list<Teacher> teacherList) {
     list<Subject> :: iterator it;
+    list<Teacher> :: iterator lit;
+    Teacher teacherArr[teacherList.size()];
+    int i = 0;
 
+    for(lit = teacherList.begin(); lit != teacherList.end(); ++lit) {
+        teacherArr[i].Id = lit->Id;
+        teacherArr[i].FirstName = lit->FirstName;
+        teacherArr[i].LastName = lit->LastName;
+        teacherArr[i].Subject = lit->Subject;
+        ++i;
+    }
+
+    i = 0;
     for (it = classList.begin(); it != classList.end(); ++it) {
-        for (int i = 0; i < size; ++i) {
-            it->Teacher.Id = arr[i].Id;
-            it->Teacher.FirstName = arr[i].FirstName;
-            it->Teacher.LastName = arr[i].LastName;
-            it->Teacher.Subject = arr[i].Subject;
-            break;
-        }
+            it->Teacher.Id = teacherArr[i].Id;
+            it->Teacher.FirstName = teacherArr[i].FirstName;
+            it->Teacher.LastName = teacherArr[i].LastName;
+            it->Teacher.Subject = teacherArr[i].Subject;
+            ++i;
     }
 
     return classList;
 }
 
+list<Subject> AssignStudentsToClass(list<Subject> classList, list<Student> studentList) {
+    list<Subject> :: iterator it;
+    list<Student> :: iterator lit;
+    int size = studentList.size();
+    Student studentClass1[size / 2];
+    Student studentClass2[size / 2];
+    int i = 0;
+    int k = 0;
+
+//    for(lit = studentList.begin(); lit != studentList.end(); ++lit) {
+
+//        if (i < (size/2)) {
+//            studentClass1[i].Id = lit->Id;
+//            studentClass1[i].FirstName = lit->FirstName;
+//            studentClass1[i].LastName = lit->LastName;
+//            studentClass1[i].Age = lit->Age;
+//            ++i;
+//        } else {
+
+//            if (k == (size/2)) {
+//                break;
+//            }
+
+//            studentClass2[k].Id = lit->Id;
+//            studentClass2[k].FirstName = lit->FirstName;
+//            studentClass2[k].LastName = lit->LastName;
+//            studentClass2[k].Age = lit->Age;
+//            ++k;
+//        }
+//    }
+
+//    i = 0;
+//    k = 0;
+
+//    for (it = classList.begin(); it != classList.end(); ++it) {
+//        int counter = 0;
+
+
+//            if (counter % 2 == 0) {
+//                it->Roster.push_back(studentClass1[i]);
+//                ++i;
+//                ++counter;
+//            } else {
+//                it->Roster.push_back(studentClass2[k]);
+//                ++k;
+//                ++counter;
+//            }
+
+//    }
+
+    // I know this method is ugly, C++ is not my forte.
+    return classList;
+}
+
+// randomly generate students from list of names
 list<Student> GenerateStudents(int size){
 
     list<Student> studentList;
@@ -197,6 +270,7 @@ list<Student> GenerateStudents(int size){
     return studentList;
 }
 
+// randomly generate teachers from list of names
 list<Teacher> GenerateTeachers(int size) {
 
     list<Teacher> teacherList;
@@ -231,8 +305,6 @@ int main()
     //Generate Student and Teacher rosters;
     list<Student> studentList = GenerateStudents(STUDENT_ROSTER_SIZE);
     list<Teacher> teacherList = GenerateTeachers(TEACHER_ROSTER_SIZE);
-    Student studentArray[STUDENT_ROSTER_SIZE];
-    Teacher teacherArray[TEACHER_ROSTER_SIZE];
 
     // build master list of school subjects
     list<Subject> masterList;
@@ -242,10 +314,10 @@ int main()
     masterList = BuildScienceClasses(masterList);
 
     // assign a teacher to each one of the subjects
-//    masterList = AssignTeachers(masterList, teacherArray, TEACHER_ROSTER_SIZE);
+    masterList = AssignTeachersToClass(masterList, teacherList);
 
-    // CODE LINE ABOVE IS NOT ITERATING THROUGH ALL TEACHERS AND ASSIGNING THEM TO A SUBJECT
-    // RESULT 1 TEACHER -> ALL 8 SUBJECTS
+    // assign students to each on of the classes
+    masterList = AssignStudentsToClass(masterList, studentList);
 
     return 0;
 }
