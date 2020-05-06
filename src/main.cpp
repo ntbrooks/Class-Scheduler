@@ -187,7 +187,59 @@ list<Subject> AssignTeachersToClass(list<Subject> classList, list<Teacher> teach
     return classList;
 }
 
+list<Subject> AssignStudentsToClass(list<Subject> classList, list<Student> studentList) {
+    list<Subject> :: iterator it;
+    list<Student> :: iterator lit;
+    int size = studentList.size();
+    Student studentClass1[size / 2];
+    Student studentClass2[size / 2];
+    int i = 0;
+    int k = 0;
 
+    for(lit = studentList.begin(); lit != studentList.end(); ++lit) {
+
+        if (i < (size/2)) {
+            studentClass1[i].Id = lit->Id;
+            studentClass1[i].FirstName = lit->FirstName;
+            studentClass1[i].LastName = lit->LastName;
+            studentClass1[i].Age = lit->Age;
+            ++i;
+        } else {
+
+            if (k == (size/2)) {
+                break;
+            }
+
+            studentClass2[k].Id = lit->Id;
+            studentClass2[k].FirstName = lit->FirstName;
+            studentClass2[k].LastName = lit->LastName;
+            studentClass2[k].Age = lit->Age;
+            ++k;
+        }
+    }
+
+    i = 0;
+    k = 0;
+
+    for (it = classList.begin(); it != classList.end(); ++it) {
+        int counter = 0;
+
+
+            if (counter % 2 == 0) {
+                it->Roster.push_back(studentClass1[i]);
+                ++i;
+                ++counter;
+            } else {
+                it->Roster.push_back(studentClass2[k]);
+                ++k;
+                ++counter;
+            }
+
+    }
+
+    // I know this method is ugly, C++ is not my forte.
+    return classList;
+}
 
 // randomly generate students from list of names
 list<Student> GenerateStudents(int size){
@@ -265,7 +317,7 @@ int main()
     masterList = AssignTeachersToClass(masterList, teacherList);
 
     // assign students to each on of the classes
-//    masterList = AssignStudentsToClass(masterList, studentList);
+    masterList = AssignStudentsToClass(masterList, studentList);
 
     return 0;
 }
