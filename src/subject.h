@@ -12,12 +12,13 @@ public:
     int CourseId;
     string CourseName;
     int ClassTime;
+    int ClassSize;
     Teacher Teacher;
     list<Student> Roster;
 
     Subject();
-    Subject(int CourseId, string CourseName, int ClassTime);
-//    Subject(int CourseId, string CourseName, time_t ClassTime, class Teacher Teacher);
+    Subject(int CourseId, string CourseName, int ClassTime, int ClassSize);
+
     void GetSubject(list<Subject> classList, int CourseId);
 };
 

@@ -17,11 +17,12 @@ Subject::Subject()
 //    this -> Teacher = Teacher;
 //}
 
-Subject::Subject(int CourseId, string CourseName, int ClassTime)
+Subject::Subject(int CourseId, string CourseName, int ClassTime, int ClassSize)
 {
     this -> CourseId = CourseId;
     this -> CourseName = CourseName;
     this -> ClassTime = ClassTime;
+    this -> ClassSize = ClassSize;
 }
 
 void Subject::GetSubject(list<Subject> classList, int Id)
@@ -33,6 +34,7 @@ void Subject::GetSubject(list<Subject> classList, int Id)
             cout << "Class ID: " << it->CourseId << endl;
             cout << "Class Name: " << it->CourseName << endl;
             cout << "Class Length: " << it->ClassTime << endl;
+            cout << "Class Size: " << it->ClassSize << endl;
             cout << "Teacher: " << it->Teacher.FirstName << " " << it->Teacher.LastName << endl;
 
             list<Student> :: iterator lit;
