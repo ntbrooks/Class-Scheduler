@@ -187,18 +187,19 @@ list<Subject> AssignTeachersToClass(list<Subject> classList, list<Teacher> teach
     return classList;
 }
 
+// Distribute the students evenly between each subject
 list<Subject> AssignStudentsToClass(list<Subject> classList, list<Student> studentList) {
     list<Subject> :: iterator it;
     list<Student> :: iterator lit;
-    int size = studentList.size();
-    Student studentClass1[size / 2];
-    Student studentClass2[size / 2];
+    int size = (studentList.size() / 2);
+    Student studentClass1[size];
+    Student studentClass2[size];
     int i = 0;
     int k = 0;
 
     for(lit = studentList.begin(); lit != studentList.end(); ++lit) {
 
-        if (i < (size/2)) {
+        if (i < size) {
             studentClass1[i].Id = lit->Id;
             studentClass1[i].FirstName = lit->FirstName;
             studentClass1[i].LastName = lit->LastName;
@@ -206,7 +207,7 @@ list<Subject> AssignStudentsToClass(list<Subject> classList, list<Student> stude
             ++i;
         } else {
 
-            if (k == (size/2)) {
+            if (k == size) {
                 break;
             }
 
@@ -218,23 +219,20 @@ list<Subject> AssignStudentsToClass(list<Subject> classList, list<Student> stude
         }
     }
 
-    i = 0;
-    k = 0;
-
+    int counter = 0;
     for (it = classList.begin(); it != classList.end(); ++it) {
-        int counter = 0;
-
 
             if (counter % 2 == 0) {
-                it->Roster.push_back(studentClass1[i]);
-                ++i;
-                ++counter;
+                for (int i = 0; i < size; ++i) {
+                   it->Roster.push_back(studentClass1[i]);
+                }
             } else {
-                it->Roster.push_back(studentClass2[k]);
-                ++k;
-                ++counter;
+                for (int k = 0; k < size; ++k) {
+                    it->Roster.push_back(studentClass2[k]);
+                }
             }
 
+        ++counter;
     }
 
     // I know this method is ugly, C++ is not my forte.
@@ -300,8 +298,9 @@ list<Teacher> GenerateTeachers(int size) {
     return teacherList;
 }
 
-int main()
-{
+// run at startup to build objects of students/teachers/school subjects
+list<Subject> StartUp() {
+
     //Generate Student and Teacher rosters;
     list<Student> studentList = GenerateStudents(STUDENT_ROSTER_SIZE);
     list<Teacher> teacherList = GenerateTeachers(TEACHER_ROSTER_SIZE);
@@ -318,6 +317,41 @@ int main()
 
     // assign students to each on of the classes
     masterList = AssignStudentsToClass(masterList, studentList);
+
+    return masterList;
+}
+
+void PrintClassInfo(list<Subject> masterList) {
+    list<Subject> :: iterator it;
+    list<Student> :: iterator lit;
+
+    for (it = masterList.begin(); it != masterList.end(); ++it) {
+        cout << "-------- Course Info -------" << endl;
+        cout << "Id: " << it->CourseId << endl;
+        cout << "Name: " << it->CourseName << endl;
+        cout << "Length: " << it->ClassTime << "minutes" << endl;
+        cout << "Roster Size: " << it->ClassSize << endl;
+
+        cout << "" << endl;
+        cout << "-------- Teacher Info --------" << endl;
+        cout << "Id: " << it->Teacher.Id << endl;
+        cout << "Name: " << it->Teacher.FirstName << " " << it->Teacher.LastName << endl;
+        cout << "Subject Taught: " << it->Teacher.Subject << endl;
+
+        cout << "" << endl;
+        cout << "-------- Student Info --------" << endl;
+        for (lit = it->Roster.begin(); lit != it->Roster.end(); ++lit) {
+            cout << "Id: " << lit->Id << " Name: " << lit->FirstName << " " << lit->LastName << " Age: " << lit->Age << endl;
+        }
+        cout << "" << endl;
+    }
+}
+
+int main()
+{
+    list<Subject> masterList = StartUp();
+
+    PrintClassInfo(masterList);
 
     return 0;
 }
