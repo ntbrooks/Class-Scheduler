@@ -28,6 +28,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     httplib.h \
+    httpserver.h \
+    qtservice.h \
     schoolsubjects.h \
     student.h \
     subject.h \

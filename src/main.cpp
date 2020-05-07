@@ -4,6 +4,7 @@
 #include "teacher.h"
 #include "subject.h"
 #include "schoolsubjects.h"
+#include "httpserver.h"
 
 using namespace std;
 const int STUDENT_ROSTER_SIZE = 36;
@@ -171,7 +172,7 @@ list<Subject> AssignTeachersToClass(list<Subject> classList, list<Teacher> teach
         teacherArr[i].Id = lit->Id;
         teacherArr[i].FirstName = lit->FirstName;
         teacherArr[i].LastName = lit->LastName;
-        teacherArr[i].Subject = lit->Subject;
+        teacherArr[i].Degree = lit->Degree;
         ++i;
     }
 
@@ -180,7 +181,7 @@ list<Subject> AssignTeachersToClass(list<Subject> classList, list<Teacher> teach
             it->Teacher.Id = teacherArr[i].Id;
             it->Teacher.FirstName = teacherArr[i].FirstName;
             it->Teacher.LastName = teacherArr[i].LastName;
-            it->Teacher.Subject = teacherArr[i].Subject;
+            it->Teacher.Degree = teacherArr[i].Degree;
             ++i;
     }
 
@@ -251,7 +252,7 @@ list<Student> GenerateStudents(int size){
         student.FirstName = GetFirstName(i);
         student.LastName = GetLastName(i);
 
-        int age = rand() % 18 + 14;
+        int age = rand() % 4 + 14;
         student.Age = age;
 
         try {
@@ -282,7 +283,7 @@ list<Teacher> GenerateTeachers(int size) {
         teacher.Id = i + 32;
         teacher.FirstName = GetFirstName(randomFirst);
         teacher.LastName = GetLastName(randomLast);
-        teacher.Subject = GetSchoolSubject(subject);
+        teacher.Degree = GetSchoolSubject(subject);
 
         try {
             if (teacher.Id == NULL) {
@@ -329,19 +330,19 @@ void PrintClassInfo(list<Subject> masterList) {
         cout << "-------- Course Info -------" << endl;
         cout << "Id: " << it->CourseId << endl;
         cout << "Name: " << it->CourseName << endl;
-        cout << "Length: " << it->ClassTime << "minutes" << endl;
+        cout << "Length: " << it->ClassTime << " minutes" << endl;
         cout << "Roster Size: " << it->ClassSize << endl;
 
         cout << "" << endl;
         cout << "-------- Teacher Info --------" << endl;
         cout << "Id: " << it->Teacher.Id << endl;
         cout << "Name: " << it->Teacher.FirstName << " " << it->Teacher.LastName << endl;
-        cout << "Subject Taught: " << it->Teacher.Subject << endl;
+        cout << "Degree: " << it->Teacher.Degree << endl;
 
         cout << "" << endl;
         cout << "-------- Student Info --------" << endl;
         for (lit = it->Roster.begin(); lit != it->Roster.end(); ++lit) {
-            cout << "Id: " << lit->Id << " Name: " << lit->FirstName << " " << lit->LastName << " Age: " << lit->Age << endl;
+            cout << "Id: " << lit->Id << ", Name: " << lit->FirstName << " " << lit->LastName << ", Age: " << lit->Age << endl;
         }
         cout << "" << endl;
     }
@@ -350,8 +351,10 @@ void PrintClassInfo(list<Subject> masterList) {
 int main()
 {
     list<Subject> masterList = StartUp();
-
     PrintClassInfo(masterList);
+
+//    HttpServer server;
+//    server.startServer(masterList);
 
     return 0;
 }

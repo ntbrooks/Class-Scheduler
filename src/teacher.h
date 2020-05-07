@@ -10,10 +10,10 @@ public:
     int Id;
     string FirstName;
     string LastName;
-    string Subject;
+    string Degree;
 
     Teacher();
-    Teacher(int Id, string FirstName, string LastName, string Subject);
+    Teacher(int Id, string FirstName, string LastName, string Degree);
     void GetTeacher(int Id);
 };
 
